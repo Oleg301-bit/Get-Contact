@@ -1,13 +1,17 @@
-import React, { Component } from 'react'
+import { Component } from 'react';
+import ContactItem from '../ContactItem/ContactItem';
 
 export class ContactList extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
-    )
+      <>
+        {this.props.contacts.map((contact) => {
+          return (<ContactItem key={contact.id} contact={contact} />);
+        })}
+        <button>New</button>
+      </>
+    );
   }
 }
 
-export default ContactList
+export default ContactList;

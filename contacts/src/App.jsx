@@ -43,7 +43,7 @@ export class App extends Component {
   render() {
     return (
       <>
-      <ContactList/>
+      <ContactList contacts={this.state.contacts}/>
       <ContactForm/>
       </>
     )
