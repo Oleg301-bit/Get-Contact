@@ -10,7 +10,7 @@ export class ContactList extends Component {
         {this.props.contacts.map((contact) => {
           return (<ContactItem key={contact.id} contact={contact} />);
         })}
-        <button>New</button>
+        <button className='set-button'>New</button>
       </div>
     );
   }
