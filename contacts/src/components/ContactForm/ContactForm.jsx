@@ -13,6 +13,9 @@ export class ContactForm extends Component {
       [event.target.name]: event.target.value,
     });
   };
+  clearField = (fieldName) => {
+    this.setState({ [fieldName]: '' });
+  };
   onFormSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit({
@@ -36,7 +39,7 @@ export class ContactForm extends Component {
             onChange={this.onInputChange}
             className='input'
           />
-          <span>X</span>
+          <span onClick={() => this.clearField('fName')}>X</span>
         </div>
         <div className='align-input-with-btn'>
           <input
@@ -47,7 +50,7 @@ export class ContactForm extends Component {
             onChange={this.onInputChange}
             className='input'
           />
-          <span>X</span>
+          <span onClick={() => this.clearField('fName')}>X</span>
         </div>
 
         <div className='align-input-with-btn'>
@@ -59,7 +62,7 @@ export class ContactForm extends Component {
             onChange={this.onInputChange}
             className='input'
           />
-          <span>X</span>
+          <span onClick={() => this.clearField('fName')}>X</span>
         </div>
 
         <div className='align-input-with-btn'>
@@ -71,7 +74,7 @@ export class ContactForm extends Component {
             onChange={this.onInputChange}
             className='input'
           />
-          <span>X</span>
+          <span onClick={() => this.clearField('fName')}>X</span>
         </div>
 
         <div className='button-container'>
