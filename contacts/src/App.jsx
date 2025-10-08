@@ -66,14 +66,28 @@ export class App extends Component {
   saveContacts = (arrContacts) => {
     localStorage.setItem('contacts', JSON.stringify(arrContacts));
   };
-  
+  deleteContact = (id) => {
+    this.setState((state) => {
+      const contacts = state.contacts.filter((contact) => contact.id !== id);
+      this.saveContacts(contacts);
+      return {
+        contacts,
+      };
+    });
+  };
   render() {
     return (
       <div className='set-border'>
         <h1>Contact List</h1>
         <div className='set-form'>
-          <ContactList contacts={this.state.contacts} />
-          <ContactForm onSubmit={this.addContact} />
+          <ContactList
+            contacts={this.state.contacts}
+            onDelete={this.deleteContact}
+          />
+          <ContactForm
+            onSubmit={this.addContact}
+            onDelete={this.deleteContact}
+          />
         </div>
       </div>
     );
