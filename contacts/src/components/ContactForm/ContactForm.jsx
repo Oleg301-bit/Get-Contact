@@ -5,17 +5,28 @@ export class ContactForm extends Component {
   state = {
     fName: '',
     lName: '',
-    email:'',
-    phone:'',
+    email: '',
+    phone: '',
   };
   onInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    this.props.onSubmit({
+      fName: this.state.fName,
+      lName: this.state.lName,
+    });
+    this.setState({
+      fName: '',
+      lName: '',
+    });
+  };
   render() {
     return (
-      <form className='watch-form'>
+      <form className='watch-form' onSubmit={this.onFormSubmit}>
         <input
           type='text'
           name='fName'
@@ -24,6 +35,7 @@ export class ContactForm extends Component {
           onChange={this.onInputChange}
           className='input'
         />
+        <span>X</span>
         <input
           type='text'
           name='lName'
@@ -32,6 +44,8 @@ export class ContactForm extends Component {
           onChange={this.onInputChange}
           className='input'
         />
+        <span>X</span>
+
         <input
           type='text'
           name='email'
@@ -40,6 +54,8 @@ export class ContactForm extends Component {
           onChange={this.onInputChange}
           className='input'
         />
+        <span>X</span>
+
         <input
           type='text'
           name='phone'
@@ -48,8 +64,12 @@ export class ContactForm extends Component {
           onChange={this.onInputChange}
           className='input'
         />
+        <span>X</span>
+
         <div className='button-container'>
-          <button className='set-button'>Save</button>
+          <button className='set-button' type='submit'>
+            Save
+          </button>
           <button className='set-button'>Delete</button>
         </div>
       </form>

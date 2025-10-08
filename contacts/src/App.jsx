@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
+import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -40,13 +41,38 @@ export class App extends Component {
       },
     ],
   };
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    if (!contacts) {
+      this.setState({
+        contacts: [],
+      });
+    } else {
+      this.setState({
+        contacts: [...contacts],
+      });
+    }
+  }
+  addContact = (contact) => {
+    contact.id = nanoid();
+    this.setState((state) => {
+      const contacts = [...state.contacts, contact];
+      this.saveContacts(contacts);
+      return {
+        contacts,
+      };
+    });
+  };
+  saveContacts = (arrContacts) => {
+    localStorage.setItem('contacts', JSON.stringify(arrContacts));
+  };
   render() {
     return (
       <div className='set-border'>
         <h1>Contact List</h1>
         <div className='set-form'>
           <ContactList contacts={this.state.contacts} />
-          <ContactForm />
+          <ContactForm onSubmit={this.addContact} />
         </div>
       </div>
     );
