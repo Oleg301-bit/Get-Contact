@@ -75,6 +75,23 @@ export class App extends Component {
       };
     });
   };
+  updateContact = (upContact) => {
+    this.setState((state) => {
+      const contacts = state.contact.map((contact) =>
+        contact.id === upContact.id
+          ? { ...upContact, isEditing: true }
+          : contact
+      );
+      this.saveContacts(contacts);
+      return {
+        contacts,
+      };
+    });
+  };
+  handleEditContact = (contact) => {
+    this.setState({ editingContact: contact });
+  };
+
   render() {
     return (
       <div className='set-border'>
@@ -83,10 +100,13 @@ export class App extends Component {
           <ContactList
             contacts={this.state.contacts}
             onDelete={this.deleteContact}
+            onEdit={this.handleEditContact}
+            onUpdate={this.onUpdate}
           />
           <ContactForm
             onSubmit={this.addContact}
             onDelete={this.deleteContact}
+            editingContact={this.state.editingContact}
           />
         </div>
       </div>
