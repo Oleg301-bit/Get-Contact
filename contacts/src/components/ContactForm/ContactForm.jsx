@@ -27,44 +27,52 @@ export class ContactForm extends Component {
   render() {
     return (
       <form className='watch-form' onSubmit={this.onFormSubmit}>
-        <input
-          type='text'
-          name='fName'
-          value={this.state.fName}
-          placeholder='First Name'
-          onChange={this.onInputChange}
-          className='input'
-        />
-        <span>X</span>
-        <input
-          type='text'
-          name='lName'
-          value={this.state.lName}
-          placeholder='Last Name'
-          onChange={this.onInputChange}
-          className='input'
-        />
-        <span>X</span>
+        <div className='align-input-with-btn'>
+          <input
+            type='text'
+            name='fName'
+            value={this.state.fName}
+            placeholder='First Name'
+            onChange={this.onInputChange}
+            className='input'
+          />
+          <span>X</span>
+        </div>
+        <div className='align-input-with-btn'>
+          <input
+            type='text'
+            name='lName'
+            value={this.state.lName}
+            placeholder='Last Name'
+            onChange={this.onInputChange}
+            className='input'
+          />
+          <span>X</span>
+        </div>
 
-        <input
-          type='text'
-          name='email'
-          value={this.state.email}
-          placeholder='Email'
-          onChange={this.onInputChange}
-          className='input'
-        />
-        <span>X</span>
+        <div className='align-input-with-btn'>
+          <input
+            type='text'
+            name='email'
+            value={this.state.email}
+            placeholder='Email'
+            onChange={this.onInputChange}
+            className='input'
+          />
+          <span>X</span>
+        </div>
 
-        <input
-          type='text'
-          name='phone'
-          value={this.state.phone}
-          placeholder='Phone'
-          onChange={this.onInputChange}
-          className='input'
-        />
-        <span>X</span>
+        <div className='align-input-with-btn'>
+          <input
+            type='text'
+            name='phone'
+            value={this.state.phone}
+            placeholder='Phone'
+            onChange={this.onInputChange}
+            className='input'
+          />
+          <span>X</span>
+        </div>
 
         <div className='button-container'>
           <button className='set-button' type='submit'>

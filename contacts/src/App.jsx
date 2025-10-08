@@ -66,6 +66,7 @@ export class App extends Component {
   saveContacts = (arrContacts) => {
     localStorage.setItem('contacts', JSON.stringify(arrContacts));
   };
+  
   render() {
     return (
       <div className='set-border'>
