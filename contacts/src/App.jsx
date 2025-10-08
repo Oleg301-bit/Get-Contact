@@ -42,11 +42,14 @@ export class App extends Component {
   };
   render() {
     return (
-      <>
-      <ContactList contacts={this.state.contacts}/>
-      <ContactForm/>
-      </>
-    )
+      <div className='set-border'>
+        <h1>Contact List</h1>
+        <div className='set-form'>
+          <ContactList contacts={this.state.contacts} />
+          <ContactForm />
+        </div>
+      </div>
+    );
   }
 }
 
