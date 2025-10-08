@@ -98,7 +98,17 @@ export class ContactForm extends Component {
           <button className='set-button' type='submit'>
             Save
           </button>
-          <button className='set-button'>Delete</button>
+          {this.props.editingContact && (
+            <button
+              className='set-button'
+              onClick={() =>
+                this.props.onDelete &&
+                this.props.onDelete(this.props.editingContact.id)
+              }
+            >
+              Delete
+            </button>
+          )}
         </div>
       </form>
     );
