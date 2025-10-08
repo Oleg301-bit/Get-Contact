@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import './ContactForm.css';
 
 export class ContactForm extends Component {
   state = {
@@ -12,7 +13,7 @@ export class ContactForm extends Component {
   };
   render() {
     return (
-      <form>
+      <form className='watch-form'>
         <input
           type='text'
           name='fName'
@@ -28,8 +29,8 @@ export class ContactForm extends Component {
           onChange={this.onInputChange}
 
         />
-        <button>Save</button>
-        <button>Delete</button>
+        <button className='set-button'>Save</button>
+        <button className='set-button'>Delete</button>
       </form>
     );
   }
