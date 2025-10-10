@@ -97,7 +97,9 @@ export class App extends Component {
   handleEditContact = (contact) => {
     this.setState({ editingContact: contact });
   };
- 
+  handleNewContact = () => {
+    this.setState({ editingContact: null });
+  };
   render() {
     return (
       <div className='set-border'>
@@ -108,6 +110,7 @@ export class App extends Component {
             onDelete={this.deleteContact}
             onEdit={this.handleEditContact}
             onUpdate={this.onUpdate}
+            onNew={this.handleNewContact}
           />
           <ContactForm
             onSubmit={this.addContact}

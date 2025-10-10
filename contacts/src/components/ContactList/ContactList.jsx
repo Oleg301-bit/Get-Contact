@@ -15,7 +15,7 @@ export class ContactList extends Component {
             />
           );
         })}
-        <button className='set-button'>
+        <button className='set-button' onClick={this.props.onNew}>
           New
         </button>
       </div>
