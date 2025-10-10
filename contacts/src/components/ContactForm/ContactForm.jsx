@@ -67,7 +67,7 @@ export class ContactForm extends Component {
             onChange={this.onInputChange}
             className='input'
           />
-          <span onClick={() => this.clearField('fName')}>X</span>
+          <span onClick={() => this.clearField('lName')}>X</span>
         </div>
 
         <div className='align-input-with-btn'>
@@ -79,7 +79,7 @@ export class ContactForm extends Component {
             onChange={this.onInputChange}
             className='input'
           />
-          <span onClick={() => this.clearField('fName')}>X</span>
+          <span onClick={() => this.clearField('email')}>X</span>
         </div>
 
         <div className='align-input-with-btn'>
@@ -91,7 +91,7 @@ export class ContactForm extends Component {
             onChange={this.onInputChange}
             className='input'
           />
-          <span onClick={() => this.clearField('fName')}>X</span>
+          <span onClick={() => this.clearField('phone')}>X</span>
         </div>
 
         <div className='button-container'>
@@ -99,7 +99,7 @@ export class ContactForm extends Component {
             Save
           </button>
           {this.props.editingContact && (
-            <button
+            <button type='button'
               className='set-button'
               onClick={() =>
                 this.props.onDelete &&

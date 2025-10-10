@@ -54,14 +54,22 @@ export class App extends Component {
     }
   }
   addContact = (contact) => {
-    contact.id = nanoid();
-    this.setState((state) => {
-      const contacts = [...state.contacts, contact];
-      this.saveContacts(contacts);
-      return {
-        contacts,
-      };
-    });
+    if (contact.id) {
+      this.setState((state) => {
+        const contacts = state.contacts.map((c) =>
+          c.id === contact.id ? contact : c
+        );
+        this.saveContacts(contacts);
+        return { contacts, editingContact: null };
+      });
+    } else {
+      contact.id = nanoid();
+      this.setState((state) => {
+        const contacts = [...state.contacts, contact];
+        this.saveContacts(contacts);
+        return { contacts };
+      });
+    }
   };
   saveContacts = (arrContacts) => {
     localStorage.setItem('contacts', JSON.stringify(arrContacts));
@@ -77,10 +85,8 @@ export class App extends Component {
   };
   updateContact = (upContact) => {
     this.setState((state) => {
-      const contacts = state.contact.map((contact) =>
-        contact.id === upContact.id
-          ? { ...upContact, isEditing: true }
-          : contact
+      const contacts = state.contacts.map((contact) =>
+        contact.id === upContact.id ? upContact : contact
       );
       this.saveContacts(contacts);
       return {
@@ -91,7 +97,7 @@ export class App extends Component {
   handleEditContact = (contact) => {
     this.setState({ editingContact: contact });
   };
-
+ 
   render() {
     return (
       <div className='set-border'>
@@ -105,6 +111,7 @@ export class App extends Component {
           />
           <ContactForm
             onSubmit={this.addContact}
+            onUpdate={this.updateContact}
             onDelete={this.deleteContact}
             editingContact={this.state.editingContact}
           />
