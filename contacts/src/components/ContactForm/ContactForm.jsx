@@ -38,11 +38,13 @@ export class ContactForm extends Component {
     };
     if (this.props.editingContact) {
       this.props.onUpdate && this.props.onUpdate(contactData);
-    } else this.props.onSubmit && this.props.onSubmit(contactData);
-    this.setState({
-      fName: '',
-      lName: '',
-    });
+    } else {
+      this.props.onSubmit && this.props.onSubmit(contactData);
+      this.setState({
+        fName: '',
+        lName: '',
+      });
+    }
   };
   render() {
     return (
@@ -99,7 +101,8 @@ export class ContactForm extends Component {
             Save
           </button>
           {this.props.editingContact && (
-            <button type='button'
+            <button
+              type='button'
               className='set-button'
               onClick={() =>
                 this.props.onDelete &&
