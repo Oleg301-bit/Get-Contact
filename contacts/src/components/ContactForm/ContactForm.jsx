@@ -104,10 +104,15 @@ export class ContactForm extends Component {
             <button
               type='button'
               className='set-button'
-              onClick={() =>
-                this.props.onDelete &&
-                this.props.onDelete(this.props.editingContact.id)
-              }
+              onClick={() => {
+                if (this.props.onDelete) {
+                  this.props.onDelete(this.props.editingContact.id);
+                }
+                this.setState({
+                  fName: '',
+                  lName: '',
+                });
+              }}
             >
               Delete
             </button>
