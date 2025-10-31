@@ -65,6 +65,7 @@ export class App extends Component {
       this.saveToLocalStorage(contacts);
       return {
         contacts,
+        editingContact: this.createEmptyContact(),
       };
     });
   };

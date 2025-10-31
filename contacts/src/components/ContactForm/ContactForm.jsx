@@ -28,7 +28,7 @@ export class ContactForm extends Component {
     }
       return null;
   }*/
-  
+
   componentDidUpdate(prevProps) {
     if (this.props.editingContact !== prevProps.editingContact) {
       if (this.props.editingContact) {
@@ -37,7 +37,6 @@ export class ContactForm extends Component {
           lName: this.props.editingContact.lName,
           email: this.props.editingContact.email,
           phone: this.props.editingContact.phone,
-
         });
       } else {
         this.setState({ fName: '', lName: '', email: '', phone: '' });
@@ -73,6 +72,11 @@ export class ContactForm extends Component {
         phone: '',
       });
     }
+  };
+  onClickDelete = () => {
+    const { onDelete, editingContact } = this.props;
+    onDelete(editingContact.id);
+    
   };
   render() {
     return (
@@ -128,25 +132,13 @@ export class ContactForm extends Component {
           <button className='set-button' type='submit'>
             Save
           </button>
-          {this.props.editingContact && (
-            <button
-              type='button'
-              className='set-button'
-              onClick={() => {
-                if (this.props.onDelete) {
-                  this.props.onDelete(this.props.editingContact.id);
-                }
-                this.setState({
-                  fName: '',
-                  lName: '',
-                  email: '',
-                  phone: '',
-                });
-              }}
-            >
-              Delete
-            </button>
-          )}
+          <button
+            type='button'
+            className='set-button'
+            onClick={this.onClickDelete}
+          >
+            Delete
+          </button>
         </div>
       </form>
     );
