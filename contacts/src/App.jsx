@@ -6,41 +6,9 @@ import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
-    contacts: [
-      {
-        id: 1,
-        fName: 'Oleg',
-        lName: 'Mask',
-        email: 'test1@gmail.com',
-        phone: '+380 959 15 88',
-        isEditing: true,
-      },
-      {
-        id: 2,
-        fName: 'John',
-        lName: 'Mark',
-        email: 'test2@gmail.com',
-        phone: '+380 969 15 88',
-        isEditing: true,
-      },
-      {
-        id: 3,
-        fName: 'Ficus',
-        lName: 'Old',
-        email: 'test3@gmail.com',
-        phone: '+380 979 15 88',
-        isEditing: true,
-      },
-      {
-        id: 4,
-        fName: 'Oni',
-        lName: 'Chan',
-        email: 'test4@gmail.com',
-        phone: '+380 989 15 88',
-        isEditing: true,
-      },
-    ],
+    contacts: [],
   };
+
   componentDidMount() {
     const contacts = JSON.parse(localStorage.getItem('contacts'));
     if (!contacts) {
@@ -53,42 +21,36 @@ export class App extends Component {
       });
     }
   }
-  addContact = (contact) => {
-    if (contact.id) {
-      this.setState((state) => {
-        const contacts = state.contacts.map((c) =>
-          c.id === contact.id ? contact : c
-        );
-        this.saveContacts(contacts);
-        return { contacts, editingContact: null };
-      });
-    } else {
-      contact.id = nanoid();
-      this.setState((state) => {
-        const contacts = [...state.contacts, contact];
-        this.saveContacts(contacts);
-        return { contacts };
-      });
-    }
+  createEmptyContact() {
+    return {
+      fName: '',
+      lName: '',
+      email: '',
+      phone: '',
+    };
+  }
+  createNewContact = () => {
+    this.setState({ editingContact: this.createEmptyContact() });
   };
-  saveContacts = (arrContacts) => {
-    localStorage.setItem('contacts', JSON.stringify(arrContacts));
-  };
-  deleteContact = (id) => {
+
+  saveContact = (contact) => {
+    contact.id = nanoid();
     this.setState((state) => {
-      const contacts = state.contacts.filter((contact) => contact.id !== id);
-      this.saveContacts(contacts);
-      return {
-        contacts,
-      };
+      const contacts = [...state.contacts, contact];
+      this.saveToLocalStorage(contacts);
+      return { contacts };
     });
   };
+  saveToLocalStorage = (arrContacts) => {
+    localStorage.setItem('contacts', JSON.stringify(arrContacts));
+  };
+
   updateContact = (upContact) => {
     this.setState((state) => {
       const contacts = state.contacts.map((contact) =>
         contact.id === upContact.id ? upContact : contact
       );
-      this.saveContacts(contacts);
+      this.saveToLocalStorage(contacts);
       return {
         contacts,
       };
@@ -97,9 +59,16 @@ export class App extends Component {
   handleEditContact = (contact) => {
     this.setState({ editingContact: contact });
   };
-  handleNewContact = () => {
-    this.setState({ editingContact: null });
+  deleteContact = (id) => {
+    this.setState((state) => {
+      const contacts = state.contacts.filter((contact) => contact.id !== id);
+      this.saveToLocalStorage(contacts);
+      return {
+        contacts,
+      };
+    });
   };
+
   render() {
     return (
       <div className='set-border'>
@@ -109,8 +78,7 @@ export class App extends Component {
             contacts={this.state.contacts}
             onDelete={this.deleteContact}
             onEdit={this.handleEditContact}
-            onUpdate={this.onUpdate}
-            onNew={this.handleNewContact}
+            onNew={this.createNewContact}
           />
           <ContactForm
             onSubmit={this.addContact}

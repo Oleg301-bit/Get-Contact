@@ -10,12 +10,14 @@ export class ContactItem extends Component {
     this.props.onEdit(this.props.contact);
   }
   render() {
-    const { fName, lName } = this.props.contact;
+    const { fName, lName} = this.props.contact;
     return (
       <div className='watch-item'>
         <p className='content' onDoubleClick={this.handleEdit}>
           {fName} {lName}
         </p>
+     
+        
         <span className='delete-btn' onClick={this.onContactDelete}>
           X
         </span>

@@ -8,15 +8,39 @@ export class ContactForm extends Component {
     email: '',
     phone: '',
   };
+  /*static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.editingContact) {
+      if (
+        nextProps.editingContact.fName !== prevState.fName ||
+        nextProps.editingContact.lName !== prevState.lName ||
+        nextProps.editingContact.email !== prevState.email ||
+        nextProps.editingContact.phone !== prevState.phone
+      ) {
+        return {
+          fName: nextProps.editingContact.fName,
+          lName: nextProps.editingContact.lName,
+          email: nextProps.editingContact.email,
+          phone: nextProps.editingContact.phone,
+        };
+      }
+    } else {
+      return { fName: '', lName: '', email: '', phone: '' };
+    }
+      return null;
+  }*/
+  
   componentDidUpdate(prevProps) {
     if (this.props.editingContact !== prevProps.editingContact) {
       if (this.props.editingContact) {
         this.setState({
-          fName: this.props.editingContact.fName || '',
-          lName: this.props.editingContact.lName || '',
+          fName: this.props.editingContact.fName,
+          lName: this.props.editingContact.lName,
+          email: this.props.editingContact.email,
+          phone: this.props.editingContact.phone,
+
         });
       } else {
-        this.setState({ fName: '', lName: '' });
+        this.setState({ fName: '', lName: '', email: '', phone: '' });
       }
     }
   }
@@ -35,6 +59,8 @@ export class ContactForm extends Component {
       ...this.props.editingContact,
       fName: this.state.fName,
       lName: this.state.lName,
+      email: this.state.email,
+      phone: this.state.phone,
     };
     if (this.props.editingContact) {
       this.props.onUpdate && this.props.onUpdate(contactData);
@@ -43,6 +69,8 @@ export class ContactForm extends Component {
       this.setState({
         fName: '',
         lName: '',
+        email: '',
+        phone: '',
       });
     }
   };
@@ -111,6 +139,8 @@ export class ContactForm extends Component {
                 this.setState({
                   fName: '',
                   lName: '',
+                  email: '',
+                  phone: '',
                 });
               }}
             >
