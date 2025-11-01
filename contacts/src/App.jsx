@@ -7,6 +7,7 @@ import { nanoid } from 'nanoid';
 export class App extends Component {
   state = {
     contacts: [],
+    editingContact: this.createEmptyContact(),
   };
 
   componentDidMount() {
@@ -23,6 +24,7 @@ export class App extends Component {
   }
   createEmptyContact() {
     return {
+      id:nanoid(),
       fName: '',
       lName: '',
       email: '',
@@ -38,7 +40,7 @@ export class App extends Component {
     this.setState((state) => {
       const contacts = [...state.contacts, contact];
       this.saveToLocalStorage(contacts);
-      return { contacts };
+      return { contacts, editingContact: this.createEmptyContact() };
     });
   };
   saveToLocalStorage = (arrContacts) => {

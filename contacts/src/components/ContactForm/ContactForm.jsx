@@ -2,46 +2,13 @@ import { Component } from 'react';
 import './ContactForm.css';
 
 export class ContactForm extends Component {
-  state = {
-    fName: '',
-    lName: '',
-    email: '',
-    phone: '',
-  };
-  /*static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.editingContact) {
-      if (
-        nextProps.editingContact.fName !== prevState.fName ||
-        nextProps.editingContact.lName !== prevState.lName ||
-        nextProps.editingContact.email !== prevState.email ||
-        nextProps.editingContact.phone !== prevState.phone
-      ) {
-        return {
-          fName: nextProps.editingContact.fName,
-          lName: nextProps.editingContact.lName,
-          email: nextProps.editingContact.email,
-          phone: nextProps.editingContact.phone,
-        };
-      }
-    } else {
-      return { fName: '', lName: '', email: '', phone: '' };
-    }
-      return null;
-  }*/
+  state = { ...this.props.editingContact };
 
-  componentDidUpdate(prevProps) {
-    if (this.props.editingContact !== prevProps.editingContact) {
-      if (this.props.editingContact) {
-        this.setState({
-          fName: this.props.editingContact.fName,
-          lName: this.props.editingContact.lName,
-          email: this.props.editingContact.email,
-          phone: this.props.editingContact.phone,
-        });
-      } else {
-        this.setState({ fName: '', lName: '', email: '', phone: '' });
-      }
+  static getDerivedStateFromProps(props, state) {
+    if (state.id === props.editingContact.id) {
+      return {};
     }
+    return { ...props.editingContact };
   }
   onInputChange = (event) => {
     this.setState({
@@ -53,30 +20,16 @@ export class ContactForm extends Component {
   };
   onFormSubmit = (event) => {
     event.preventDefault();
-
-    const contactData = {
-      ...this.props.editingContact,
+    this.props.onSubmit({
       fName: this.state.fName,
       lName: this.state.lName,
       email: this.state.email,
       phone: this.state.phone,
-    };
-    if (this.props.editingContact) {
-      this.props.onUpdate && this.props.onUpdate(contactData);
-    } else {
-      this.props.onSubmit && this.props.onSubmit(contactData);
-      this.setState({
-        fName: '',
-        lName: '',
-        email: '',
-        phone: '',
-      });
-    }
+    });
   };
   onClickDelete = () => {
     const { onDelete, editingContact } = this.props;
     onDelete(editingContact.id);
-    
   };
   render() {
     return (
