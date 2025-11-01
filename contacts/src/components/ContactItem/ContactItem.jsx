@@ -6,7 +6,8 @@ export class ContactItem extends Component {
     event.stopPropagation();
     this.props.onDelete(this.props.contact.id);
   };
-  handleEdit = () => {
+  handleEdit = (event) => {
+    event.stopPropagation();
     this.props.onEdit(this.props.contact);
   }
   render() {
