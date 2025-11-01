@@ -33,7 +33,7 @@ export class App extends Component {
     this.setState({ editingContact: this.createEmptyContact() });
   };
 
-  saveContact = (contact) => {
+  addContact = (contact) => {
     contact.id = nanoid();
     this.setState((state) => {
       const contacts = [...state.contacts, contact];
