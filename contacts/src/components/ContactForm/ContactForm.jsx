@@ -21,10 +21,7 @@ export class ContactForm extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit({
-      fName: this.state.fName,
-      lName: this.state.lName,
-      email: this.state.email,
-      phone: this.state.phone,
+      ...this.state,
     });
   };
   onClickDelete = () => {
@@ -85,13 +82,15 @@ export class ContactForm extends Component {
           <button className='set-button' type='submit'>
             Save
           </button>
-          <button
-            type='button'
-            className='set-button'
-            onClick={this.onClickDelete}
-          >
-            Delete
-          </button>
+          {this.props.editingContact && (
+            <button
+              type='button'
+              className='set-button'
+              onClick={this.onClickDelete}
+            >
+              Delete
+            </button>
+          )}
         </div>
       </form>
     );
