@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './ContactItem.css';
 
 export class ContactItem extends Component {
-  onContactDelete = (event) => {
+  onItemDelete = (event) => {
     event.stopPropagation();
     this.props.onDelete(this.props.contact.id);
   };
@@ -18,7 +18,7 @@ export class ContactItem extends Component {
           {fName} {lName}
         </p>
 
-        <span className='delete-btn' onClick={this.onContactDelete}>
+        <span className='delete-btn' onClick={this.onItemDelete}>
           X
         </span>
       </div>
