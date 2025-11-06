@@ -46,7 +46,7 @@ export class App extends Component {
     this.setState((state) => {
       const contacts = [...state.contacts, contact];
       this.saveToLocalStorage(contacts);
-      return { contacts, editingContact: this.createEmptyContact() }
+      return { contacts, editingContact: this.createEmptyContact() };
     });
   };
   saveToLocalStorage = (arrContacts) => {
@@ -91,6 +91,7 @@ export class App extends Component {
             onNew={this.createNewContact}
           />
           <ContactForm
+            key={this.state.editingContact.id}
             onSubmit={this.saveContact}
             onUpdate={this.updateContact}
             onDelete={this.deleteContact}

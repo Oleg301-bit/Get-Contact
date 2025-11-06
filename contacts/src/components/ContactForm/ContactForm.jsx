@@ -11,12 +11,6 @@ export class ContactForm extends Component {
       phone: '',
     };
   }
-  static getDerivedStateFromProps(props, state) {
-    if (state.id === props.editingContact.id) {
-      return {};
-    }
-    return { ...props.editingContact };
-  }
   onInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
