@@ -24,7 +24,7 @@ export class App extends Component {
   }
   createEmptyContact() {
     return {
-      id:nanoid(),
+      id: nanoid(),
       fName: '',
       lName: '',
       email: '',
@@ -33,6 +33,13 @@ export class App extends Component {
   }
   createNewContact = () => {
     this.setState({ editingContact: this.createEmptyContact() });
+  };
+  saveContact = (contact) => {
+    if (!contact.id) {
+      this.addContact(contact);
+    } else {
+      this.updateContact(contact);
+    }
   };
 
   addContact = (contact) => {
@@ -55,6 +62,7 @@ export class App extends Component {
       this.saveToLocalStorage(contacts);
       return {
         contacts,
+        editingContact: contacts,
       };
     });
   };
@@ -84,7 +92,7 @@ export class App extends Component {
             onNew={this.createNewContact}
           />
           <ContactForm
-            onSubmit={this.addContact}
+            onSubmit={this.saveContact}
             onUpdate={this.updateContact}
             onDelete={this.deleteContact}
             editingContact={this.state.editingContact}
