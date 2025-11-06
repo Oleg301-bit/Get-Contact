@@ -3,7 +3,14 @@ import './ContactForm.css';
 
 export class ContactForm extends Component {
   state = { ...this.props.editingContact };
-
+  createEmptyContact() {
+    return {
+      fName: '',
+      lName: '',
+      email: '',
+      phone: '',
+    };
+  }
   static getDerivedStateFromProps(props, state) {
     if (state.id === props.editingContact.id) {
       return {};
@@ -23,6 +30,11 @@ export class ContactForm extends Component {
     this.props.onSubmit({
       ...this.state,
     });
+    if (!this.state.id) {
+      this.setState({
+        ...this.createEmptyContact(),
+      });
+    }
   };
   onClickDelete = () => {
     const { onDelete, editingContact } = this.props;
@@ -82,7 +94,7 @@ export class ContactForm extends Component {
           <button className='set-button' type='submit'>
             Save
           </button>
-          {this.props.editingContact && (
+          {this.state.id ? (
             <button
               type='button'
               className='set-button'
@@ -90,6 +102,8 @@ export class ContactForm extends Component {
             >
               Delete
             </button>
+          ) : (
+            ''
           )}
         </div>
       </form>

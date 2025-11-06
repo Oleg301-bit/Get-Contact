@@ -24,7 +24,6 @@ export class App extends Component {
   }
   createEmptyContact() {
     return {
-      id: nanoid(),
       fName: '',
       lName: '',
       email: '',
@@ -36,18 +35,18 @@ export class App extends Component {
   };
   saveContact = (contact) => {
     if (!contact.id) {
-      this.addContact(contact);
+      this.createContact(contact);
     } else {
       this.updateContact(contact);
     }
   };
 
-  addContact = (contact) => {
+  createContact = (contact) => {
     contact.id = nanoid();
     this.setState((state) => {
       const contacts = [...state.contacts, contact];
       this.saveToLocalStorage(contacts);
-      this.setState({ contacts, editingContact: this.createEmptyContact() });
+      return { contacts, editingContact: this.createEmptyContact() }
     });
   };
   saveToLocalStorage = (arrContacts) => {
