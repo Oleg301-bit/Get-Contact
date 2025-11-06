@@ -36,7 +36,7 @@ export class ContactForm extends Component {
       });
     }
   };
-  onClickDelete = () => {
+  onButtonDelete = () => {
     const { onDelete, editingContact } = this.props;
     onDelete(editingContact.id);
   };
@@ -98,7 +98,7 @@ export class ContactForm extends Component {
             <button
               type='button'
               className='set-button'
-              onClick={this.onClickDelete}
+              onClick={this.onButtonDelete}
             >
               Delete
             </button>
